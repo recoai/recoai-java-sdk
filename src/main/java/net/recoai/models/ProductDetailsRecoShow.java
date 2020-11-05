@@ -1,6 +1,7 @@
 package net.recoai.models;
 
 import com.fasterxml.jackson.annotation.*;
+import java.util.Map;
 
 public class ProductDetailsRecoShow {
     private String canonicalProductURI;
@@ -9,6 +10,9 @@ public class ProductDetailsRecoShow {
     private ExactPrice exactPrice;
     private String id;
     private Image[] images;
+    private String recID;
+    private Double score;
+    private Map<String, Double> strategiesUsed;
     private String title;
 
     @JsonProperty("canonical_product_uri")
@@ -40,6 +44,21 @@ public class ProductDetailsRecoShow {
     public Image[] getImages() { return images; }
     @JsonProperty("images")
     public void setImages(Image[] value) { this.images = value; }
+
+    @JsonProperty("rec_id")
+    public String getRecID() { return recID; }
+    @JsonProperty("rec_id")
+    public void setRecID(String value) { this.recID = value; }
+
+    @JsonProperty("score")
+    public Double getScore() { return score; }
+    @JsonProperty("score")
+    public void setScore(Double value) { this.score = value; }
+
+    @JsonProperty("strategies_used")
+    public Map<String, Double> getStrategiesUsed() { return strategiesUsed; }
+    @JsonProperty("strategies_used")
+    public void setStrategiesUsed(Map<String, Double> value) { this.strategiesUsed = value; }
 
     @JsonProperty("title")
     public String getTitle() { return title; }

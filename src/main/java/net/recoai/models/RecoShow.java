@@ -12,7 +12,6 @@ public class RecoShow {
     private ProductDetailsRecoShow[] items;
     private Location location;
     private String placementName;
-    private String recID;
     private UserInfo userInfo;
 
     @JsonProperty("additional_uri_params")
@@ -54,11 +53,6 @@ public class RecoShow {
     public String getPlacementName() { return placementName; }
     @JsonProperty("placement_name")
     public void setPlacementName(String value) { this.placementName = value; }
-
-    @JsonProperty("rec_id")
-    public String getRecID() { return recID; }
-    @JsonProperty("rec_id")
-    public void setRecID(String value) { this.recID = value; }
 
     @JsonProperty("user_info")
     public UserInfo getUserInfo() { return userInfo; }

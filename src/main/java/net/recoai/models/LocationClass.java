@@ -7,6 +7,7 @@ public class LocationClass {
     private String addToCart;
     private String categoryPage;
     private SearchInfo searchPage;
+    private String[] checkoutPage;
     private PageInfo otherPage;
     private PageInfo unknownPage;
 
@@ -29,6 +30,11 @@ public class LocationClass {
     public SearchInfo getSearchPage() { return searchPage; }
     @JsonProperty("SearchPage")
     public void setSearchPage(SearchInfo value) { this.searchPage = value; }
+
+    @JsonProperty("CheckoutPage")
+    public String[] getCheckoutPage() { return checkoutPage; }
+    @JsonProperty("CheckoutPage")
+    public void setCheckoutPage(String[] value) { this.checkoutPage = value; }
 
     @JsonProperty("OtherPage")
     public PageInfo getOtherPage() { return otherPage; }

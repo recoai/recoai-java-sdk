@@ -8,7 +8,6 @@ public class AddToCart {
     private long eventTime;
     private EventType eventType;
     private ItemDetails[] items;
-    private String recID;
     private UserInfo userInfo;
 
     @JsonProperty("cart_id")
@@ -35,11 +34,6 @@ public class AddToCart {
     public ItemDetails[] getItems() { return items; }
     @JsonProperty("items")
     public void setItems(ItemDetails[] value) { this.items = value; }
-
-    @JsonProperty("rec_id")
-    public String getRecID() { return recID; }
-    @JsonProperty("rec_id")
-    public void setRecID(String value) { this.recID = value; }
 
     @JsonProperty("user_info")
     public UserInfo getUserInfo() { return userInfo; }
