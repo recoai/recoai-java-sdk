@@ -19,20 +19,24 @@
 //     DetailProductView data = Converter.DetailProductViewFromJsonString(jsonString);
 //     HomePageView data = Converter.HomePageViewFromJsonString(jsonString);
 //     ImageInteraction data = Converter.ImageInteractionFromJsonString(jsonString);
+//     RemoveItem data = Converter.RemoveItemFromJsonString(jsonString);
+//     UpsertItem data = Converter.UpsertItemFromJsonString(jsonString);
 //     ListView data = Converter.ListViewFromJsonString(jsonString);
+//     OfflineRecommendationsRemove data = Converter.OfflineRecommendationsRemoveFromJsonString(jsonString);
+//     OfflineRecommendationsUpsert data = Converter.OfflineRecommendationsUpsertFromJsonString(jsonString);
 //     OtherInteraction data = Converter.OtherInteractionFromJsonString(jsonString);
 //     PageVisit data = Converter.PageVisitFromJsonString(jsonString);
+//     PlacementRemove data = Converter.PlacementRemoveFromJsonString(jsonString);
+//     PlacementUpsert data = Converter.PlacementUpsertFromJsonString(jsonString);
 //     PurchaseComplete data = Converter.PurchaseCompleteFromJsonString(jsonString);
 //     RateProduct data = Converter.RateProductFromJsonString(jsonString);
 //     RecoRequest data = Converter.RecoRequestFromJsonString(jsonString);
 //     RecoShow data = Converter.RecoShowFromJsonString(jsonString);
 //     RemoveFromCart data = Converter.RemoveFromCartFromJsonString(jsonString);
 //     RemoveFromList data = Converter.RemoveFromListFromJsonString(jsonString);
-//     RemoveItem data = Converter.RemoveItemFromJsonString(jsonString);
 //     CartPageView data = Converter.CartPageViewFromJsonString(jsonString);
 //     SortItems data = Converter.SortItemsFromJsonString(jsonString);
 //     UnknownEvent data = Converter.UnknownEventFromJsonString(jsonString);
-//     UpsertItem data = Converter.UpsertItemFromJsonString(jsonString);
 
 package net.recoai.models;
 
@@ -154,12 +158,44 @@ public class Converter {
         return getImageInteractionObjectWriter().writeValueAsString(obj);
     }
 
+    public static RemoveItem RemoveItemFromJsonString(String json) throws IOException {
+        return getRemoveItemObjectReader().readValue(json);
+    }
+
+    public static String RemoveItemToJsonString(RemoveItem obj) throws JsonProcessingException {
+        return getRemoveItemObjectWriter().writeValueAsString(obj);
+    }
+
+    public static UpsertItem UpsertItemFromJsonString(String json) throws IOException {
+        return getUpsertItemObjectReader().readValue(json);
+    }
+
+    public static String UpsertItemToJsonString(UpsertItem obj) throws JsonProcessingException {
+        return getUpsertItemObjectWriter().writeValueAsString(obj);
+    }
+
     public static ListView ListViewFromJsonString(String json) throws IOException {
         return getListViewObjectReader().readValue(json);
     }
 
     public static String ListViewToJsonString(ListView obj) throws JsonProcessingException {
         return getListViewObjectWriter().writeValueAsString(obj);
+    }
+
+    public static OfflineRecommendationsRemove OfflineRecommendationsRemoveFromJsonString(String json) throws IOException {
+        return getOfflineRecommendationsRemoveObjectReader().readValue(json);
+    }
+
+    public static String OfflineRecommendationsRemoveToJsonString(OfflineRecommendationsRemove obj) throws JsonProcessingException {
+        return getOfflineRecommendationsRemoveObjectWriter().writeValueAsString(obj);
+    }
+
+    public static OfflineRecommendationsUpsert OfflineRecommendationsUpsertFromJsonString(String json) throws IOException {
+        return getOfflineRecommendationsUpsertObjectReader().readValue(json);
+    }
+
+    public static String OfflineRecommendationsUpsertToJsonString(OfflineRecommendationsUpsert obj) throws JsonProcessingException {
+        return getOfflineRecommendationsUpsertObjectWriter().writeValueAsString(obj);
     }
 
     public static OtherInteraction OtherInteractionFromJsonString(String json) throws IOException {
@@ -176,6 +212,22 @@ public class Converter {
 
     public static String PageVisitToJsonString(PageVisit obj) throws JsonProcessingException {
         return getPageVisitObjectWriter().writeValueAsString(obj);
+    }
+
+    public static PlacementRemove PlacementRemoveFromJsonString(String json) throws IOException {
+        return getPlacementRemoveObjectReader().readValue(json);
+    }
+
+    public static String PlacementRemoveToJsonString(PlacementRemove obj) throws JsonProcessingException {
+        return getPlacementRemoveObjectWriter().writeValueAsString(obj);
+    }
+
+    public static PlacementUpsert PlacementUpsertFromJsonString(String json) throws IOException {
+        return getPlacementUpsertObjectReader().readValue(json);
+    }
+
+    public static String PlacementUpsertToJsonString(PlacementUpsert obj) throws JsonProcessingException {
+        return getPlacementUpsertObjectWriter().writeValueAsString(obj);
     }
 
     public static PurchaseComplete PurchaseCompleteFromJsonString(String json) throws IOException {
@@ -226,14 +278,6 @@ public class Converter {
         return getRemoveFromListObjectWriter().writeValueAsString(obj);
     }
 
-    public static RemoveItem RemoveItemFromJsonString(String json) throws IOException {
-        return getRemoveItemObjectReader().readValue(json);
-    }
-
-    public static String RemoveItemToJsonString(RemoveItem obj) throws JsonProcessingException {
-        return getRemoveItemObjectWriter().writeValueAsString(obj);
-    }
-
     public static CartPageView CartPageViewFromJsonString(String json) throws IOException {
         return getCartPageViewObjectReader().readValue(json);
     }
@@ -256,14 +300,6 @@ public class Converter {
 
     public static String UnknownEventToJsonString(UnknownEvent obj) throws JsonProcessingException {
         return getUnknownEventObjectWriter().writeValueAsString(obj);
-    }
-
-    public static UpsertItem UpsertItemFromJsonString(String json) throws IOException {
-        return getUpsertItemObjectReader().readValue(json);
-    }
-
-    public static String UpsertItemToJsonString(UpsertItem obj) throws JsonProcessingException {
-        return getUpsertItemObjectWriter().writeValueAsString(obj);
     }
 
     private static ObjectReader AddToCartReader;
@@ -536,6 +572,66 @@ public class Converter {
         return ImageInteractionWriter;
     }
 
+    private static ObjectReader RemoveItemReader;
+    private static ObjectWriter RemoveItemWriter;
+
+    private static void instantiateRemoveItemMapper() {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.findAndRegisterModules();
+        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+        SimpleModule module = new SimpleModule();
+        module.addDeserializer(OffsetDateTime.class, new JsonDeserializer<OffsetDateTime>() {
+            @Override
+            public OffsetDateTime deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
+                String value = jsonParser.getText();
+                return Converter.parseDateTimeString(value);
+            }
+        });
+        mapper.registerModule(module);
+        RemoveItemReader = mapper.readerFor(RemoveItem.class);
+        RemoveItemWriter = mapper.writerFor(RemoveItem.class);
+    }
+
+    private static ObjectReader getRemoveItemObjectReader() {
+        if (RemoveItemReader == null) instantiateRemoveItemMapper();
+        return RemoveItemReader;
+    }
+
+    private static ObjectWriter getRemoveItemObjectWriter() {
+        if (RemoveItemWriter == null) instantiateRemoveItemMapper();
+        return RemoveItemWriter;
+    }
+
+    private static ObjectReader UpsertItemReader;
+    private static ObjectWriter UpsertItemWriter;
+
+    private static void instantiateUpsertItemMapper() {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.findAndRegisterModules();
+        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+        SimpleModule module = new SimpleModule();
+        module.addDeserializer(OffsetDateTime.class, new JsonDeserializer<OffsetDateTime>() {
+            @Override
+            public OffsetDateTime deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
+                String value = jsonParser.getText();
+                return Converter.parseDateTimeString(value);
+            }
+        });
+        mapper.registerModule(module);
+        UpsertItemReader = mapper.readerFor(UpsertItem.class);
+        UpsertItemWriter = mapper.writerFor(UpsertItem.class);
+    }
+
+    private static ObjectReader getUpsertItemObjectReader() {
+        if (UpsertItemReader == null) instantiateUpsertItemMapper();
+        return UpsertItemReader;
+    }
+
+    private static ObjectWriter getUpsertItemObjectWriter() {
+        if (UpsertItemWriter == null) instantiateUpsertItemMapper();
+        return UpsertItemWriter;
+    }
+
     private static ObjectReader ListViewReader;
     private static ObjectWriter ListViewWriter;
 
@@ -564,6 +660,66 @@ public class Converter {
     private static ObjectWriter getListViewObjectWriter() {
         if (ListViewWriter == null) instantiateListViewMapper();
         return ListViewWriter;
+    }
+
+    private static ObjectReader OfflineRecommendationsRemoveReader;
+    private static ObjectWriter OfflineRecommendationsRemoveWriter;
+
+    private static void instantiateOfflineRecommendationsRemoveMapper() {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.findAndRegisterModules();
+        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+        SimpleModule module = new SimpleModule();
+        module.addDeserializer(OffsetDateTime.class, new JsonDeserializer<OffsetDateTime>() {
+            @Override
+            public OffsetDateTime deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
+                String value = jsonParser.getText();
+                return Converter.parseDateTimeString(value);
+            }
+        });
+        mapper.registerModule(module);
+        OfflineRecommendationsRemoveReader = mapper.readerFor(OfflineRecommendationsRemove.class);
+        OfflineRecommendationsRemoveWriter = mapper.writerFor(OfflineRecommendationsRemove.class);
+    }
+
+    private static ObjectReader getOfflineRecommendationsRemoveObjectReader() {
+        if (OfflineRecommendationsRemoveReader == null) instantiateOfflineRecommendationsRemoveMapper();
+        return OfflineRecommendationsRemoveReader;
+    }
+
+    private static ObjectWriter getOfflineRecommendationsRemoveObjectWriter() {
+        if (OfflineRecommendationsRemoveWriter == null) instantiateOfflineRecommendationsRemoveMapper();
+        return OfflineRecommendationsRemoveWriter;
+    }
+
+    private static ObjectReader OfflineRecommendationsUpsertReader;
+    private static ObjectWriter OfflineRecommendationsUpsertWriter;
+
+    private static void instantiateOfflineRecommendationsUpsertMapper() {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.findAndRegisterModules();
+        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+        SimpleModule module = new SimpleModule();
+        module.addDeserializer(OffsetDateTime.class, new JsonDeserializer<OffsetDateTime>() {
+            @Override
+            public OffsetDateTime deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
+                String value = jsonParser.getText();
+                return Converter.parseDateTimeString(value);
+            }
+        });
+        mapper.registerModule(module);
+        OfflineRecommendationsUpsertReader = mapper.readerFor(OfflineRecommendationsUpsert.class);
+        OfflineRecommendationsUpsertWriter = mapper.writerFor(OfflineRecommendationsUpsert.class);
+    }
+
+    private static ObjectReader getOfflineRecommendationsUpsertObjectReader() {
+        if (OfflineRecommendationsUpsertReader == null) instantiateOfflineRecommendationsUpsertMapper();
+        return OfflineRecommendationsUpsertReader;
+    }
+
+    private static ObjectWriter getOfflineRecommendationsUpsertObjectWriter() {
+        if (OfflineRecommendationsUpsertWriter == null) instantiateOfflineRecommendationsUpsertMapper();
+        return OfflineRecommendationsUpsertWriter;
     }
 
     private static ObjectReader OtherInteractionReader;
@@ -624,6 +780,66 @@ public class Converter {
     private static ObjectWriter getPageVisitObjectWriter() {
         if (PageVisitWriter == null) instantiatePageVisitMapper();
         return PageVisitWriter;
+    }
+
+    private static ObjectReader PlacementRemoveReader;
+    private static ObjectWriter PlacementRemoveWriter;
+
+    private static void instantiatePlacementRemoveMapper() {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.findAndRegisterModules();
+        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+        SimpleModule module = new SimpleModule();
+        module.addDeserializer(OffsetDateTime.class, new JsonDeserializer<OffsetDateTime>() {
+            @Override
+            public OffsetDateTime deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
+                String value = jsonParser.getText();
+                return Converter.parseDateTimeString(value);
+            }
+        });
+        mapper.registerModule(module);
+        PlacementRemoveReader = mapper.readerFor(PlacementRemove.class);
+        PlacementRemoveWriter = mapper.writerFor(PlacementRemove.class);
+    }
+
+    private static ObjectReader getPlacementRemoveObjectReader() {
+        if (PlacementRemoveReader == null) instantiatePlacementRemoveMapper();
+        return PlacementRemoveReader;
+    }
+
+    private static ObjectWriter getPlacementRemoveObjectWriter() {
+        if (PlacementRemoveWriter == null) instantiatePlacementRemoveMapper();
+        return PlacementRemoveWriter;
+    }
+
+    private static ObjectReader PlacementUpsertReader;
+    private static ObjectWriter PlacementUpsertWriter;
+
+    private static void instantiatePlacementUpsertMapper() {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.findAndRegisterModules();
+        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+        SimpleModule module = new SimpleModule();
+        module.addDeserializer(OffsetDateTime.class, new JsonDeserializer<OffsetDateTime>() {
+            @Override
+            public OffsetDateTime deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
+                String value = jsonParser.getText();
+                return Converter.parseDateTimeString(value);
+            }
+        });
+        mapper.registerModule(module);
+        PlacementUpsertReader = mapper.readerFor(PlacementUpsert.class);
+        PlacementUpsertWriter = mapper.writerFor(PlacementUpsert.class);
+    }
+
+    private static ObjectReader getPlacementUpsertObjectReader() {
+        if (PlacementUpsertReader == null) instantiatePlacementUpsertMapper();
+        return PlacementUpsertReader;
+    }
+
+    private static ObjectWriter getPlacementUpsertObjectWriter() {
+        if (PlacementUpsertWriter == null) instantiatePlacementUpsertMapper();
+        return PlacementUpsertWriter;
     }
 
     private static ObjectReader PurchaseCompleteReader;
@@ -806,36 +1022,6 @@ public class Converter {
         return RemoveFromListWriter;
     }
 
-    private static ObjectReader RemoveItemReader;
-    private static ObjectWriter RemoveItemWriter;
-
-    private static void instantiateRemoveItemMapper() {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.findAndRegisterModules();
-        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-        SimpleModule module = new SimpleModule();
-        module.addDeserializer(OffsetDateTime.class, new JsonDeserializer<OffsetDateTime>() {
-            @Override
-            public OffsetDateTime deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
-                String value = jsonParser.getText();
-                return Converter.parseDateTimeString(value);
-            }
-        });
-        mapper.registerModule(module);
-        RemoveItemReader = mapper.readerFor(RemoveItem.class);
-        RemoveItemWriter = mapper.writerFor(RemoveItem.class);
-    }
-
-    private static ObjectReader getRemoveItemObjectReader() {
-        if (RemoveItemReader == null) instantiateRemoveItemMapper();
-        return RemoveItemReader;
-    }
-
-    private static ObjectWriter getRemoveItemObjectWriter() {
-        if (RemoveItemWriter == null) instantiateRemoveItemMapper();
-        return RemoveItemWriter;
-    }
-
     private static ObjectReader CartPageViewReader;
     private static ObjectWriter CartPageViewWriter;
 
@@ -924,35 +1110,5 @@ public class Converter {
     private static ObjectWriter getUnknownEventObjectWriter() {
         if (UnknownEventWriter == null) instantiateUnknownEventMapper();
         return UnknownEventWriter;
-    }
-
-    private static ObjectReader UpsertItemReader;
-    private static ObjectWriter UpsertItemWriter;
-
-    private static void instantiateUpsertItemMapper() {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.findAndRegisterModules();
-        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-        SimpleModule module = new SimpleModule();
-        module.addDeserializer(OffsetDateTime.class, new JsonDeserializer<OffsetDateTime>() {
-            @Override
-            public OffsetDateTime deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
-                String value = jsonParser.getText();
-                return Converter.parseDateTimeString(value);
-            }
-        });
-        mapper.registerModule(module);
-        UpsertItemReader = mapper.readerFor(UpsertItem.class);
-        UpsertItemWriter = mapper.writerFor(UpsertItem.class);
-    }
-
-    private static ObjectReader getUpsertItemObjectReader() {
-        if (UpsertItemReader == null) instantiateUpsertItemMapper();
-        return UpsertItemReader;
-    }
-
-    private static ObjectWriter getUpsertItemObjectWriter() {
-        if (UpsertItemWriter == null) instantiateUpsertItemMapper();
-        return UpsertItemWriter;
     }
 }
