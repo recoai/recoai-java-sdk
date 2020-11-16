@@ -12,12 +12,13 @@ public class ProductDetails {
     private Map<String, Double> costs;
     private Currency currencyCode;
     private String description;
-    private ExactPrice exactPrice;
     private String id;
     private Image[] images;
     private String itemGroupID;
     private String languageCode;
     private Map<String, Double> numericAttributes;
+    private ExactPrice price;
+    private String productCode;
     private StockState stockState;
     private String[] tags;
     private String title;
@@ -62,11 +63,6 @@ public class ProductDetails {
     @JsonProperty("description")
     public void setDescription(String value) { this.description = value; }
 
-    @JsonProperty("exact_price")
-    public ExactPrice getExactPrice() { return exactPrice; }
-    @JsonProperty("exact_price")
-    public void setExactPrice(ExactPrice value) { this.exactPrice = value; }
-
     @JsonProperty("id")
     public String getID() { return id; }
     @JsonProperty("id")
@@ -91,6 +87,16 @@ public class ProductDetails {
     public Map<String, Double> getNumericAttributes() { return numericAttributes; }
     @JsonProperty("numeric_attributes")
     public void setNumericAttributes(Map<String, Double> value) { this.numericAttributes = value; }
+
+    @JsonProperty("price")
+    public ExactPrice getPrice() { return price; }
+    @JsonProperty("price")
+    public void setPrice(ExactPrice value) { this.price = value; }
+
+    @JsonProperty("product_code")
+    public String getProductCode() { return productCode; }
+    @JsonProperty("product_code")
+    public void setProductCode(String value) { this.productCode = value; }
 
     @JsonProperty("stock_state")
     public StockState getStockState() { return stockState; }

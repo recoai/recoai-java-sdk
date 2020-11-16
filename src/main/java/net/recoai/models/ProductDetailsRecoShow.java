@@ -7,9 +7,10 @@ public class ProductDetailsRecoShow {
     private String canonicalProductURI;
     private String[][] categories;
     private Currency currencyCode;
-    private ExactPrice exactPrice;
     private String id;
     private Image[] images;
+    private ExactPrice price;
+    private String productCode;
     private String recID;
     private Double score;
     private Map<String, Double> strategiesUsed;
@@ -30,11 +31,6 @@ public class ProductDetailsRecoShow {
     @JsonProperty("currency_code")
     public void setCurrencyCode(Currency value) { this.currencyCode = value; }
 
-    @JsonProperty("exact_price")
-    public ExactPrice getExactPrice() { return exactPrice; }
-    @JsonProperty("exact_price")
-    public void setExactPrice(ExactPrice value) { this.exactPrice = value; }
-
     @JsonProperty("id")
     public String getID() { return id; }
     @JsonProperty("id")
@@ -44,6 +40,16 @@ public class ProductDetailsRecoShow {
     public Image[] getImages() { return images; }
     @JsonProperty("images")
     public void setImages(Image[] value) { this.images = value; }
+
+    @JsonProperty("price")
+    public ExactPrice getPrice() { return price; }
+    @JsonProperty("price")
+    public void setPrice(ExactPrice value) { this.price = value; }
+
+    @JsonProperty("product_code")
+    public String getProductCode() { return productCode; }
+    @JsonProperty("product_code")
+    public void setProductCode(String value) { this.productCode = value; }
 
     @JsonProperty("rec_id")
     public String getRecID() { return recID; }

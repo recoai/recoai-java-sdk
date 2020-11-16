@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.*;
 public class LocationClass {
     private String productPage;
     private String addToCart;
-    private String categoryPage;
+    private String[] categoryPage;
     private SearchInfo searchPage;
     private String[] checkoutPage;
     private PageInfo otherPage;
@@ -22,9 +22,9 @@ public class LocationClass {
     public void setAddToCart(String value) { this.addToCart = value; }
 
     @JsonProperty("CategoryPage")
-    public String getCategoryPage() { return categoryPage; }
+    public String[] getCategoryPage() { return categoryPage; }
     @JsonProperty("CategoryPage")
-    public void setCategoryPage(String value) { this.categoryPage = value; }
+    public void setCategoryPage(String[] value) { this.categoryPage = value; }
 
     @JsonProperty("SearchPage")
     public SearchInfo getSearchPage() { return searchPage; }
