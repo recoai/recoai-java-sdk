@@ -5,9 +5,9 @@ import com.fasterxml.jackson.annotation.*;
 public class AddToCart {
     private String cartID;
     private EventDetail eventDetail;
-    private long eventTime;
+    private Long eventTime;
     private EventType eventType;
-    private ItemDetails[] items;
+    private ItemDetails item;
     private UserInfo userInfo;
 
     @JsonProperty("cart_id")
@@ -21,19 +21,19 @@ public class AddToCart {
     public void setEventDetail(EventDetail value) { this.eventDetail = value; }
 
     @JsonProperty("event_time")
-    public long getEventTime() { return eventTime; }
+    public Long getEventTime() { return eventTime; }
     @JsonProperty("event_time")
-    public void setEventTime(long value) { this.eventTime = value; }
+    public void setEventTime(Long value) { this.eventTime = value; }
 
     @JsonProperty("event_type")
     public EventType getEventType() { return eventType; }
     @JsonProperty("event_type")
     public void setEventType(EventType value) { this.eventType = value; }
 
-    @JsonProperty("items")
-    public ItemDetails[] getItems() { return items; }
-    @JsonProperty("items")
-    public void setItems(ItemDetails[] value) { this.items = value; }
+    @JsonProperty("item")
+    public ItemDetails getItem() { return item; }
+    @JsonProperty("item")
+    public void setItem(ItemDetails value) { this.item = value; }
 
     @JsonProperty("user_info")
     public UserInfo getUserInfo() { return userInfo; }

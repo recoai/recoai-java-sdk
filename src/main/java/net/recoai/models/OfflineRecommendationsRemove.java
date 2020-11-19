@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.*;
 
 public class OfflineRecommendationsRemove {
     private EventDetail eventDetail;
-    private long eventTime;
+    private Long eventTime;
     private EventType eventType;
     private OfflineRecommendationsType name;
     private UserInfo userInfo;
@@ -15,9 +15,9 @@ public class OfflineRecommendationsRemove {
     public void setEventDetail(EventDetail value) { this.eventDetail = value; }
 
     @JsonProperty("event_time")
-    public long getEventTime() { return eventTime; }
+    public Long getEventTime() { return eventTime; }
     @JsonProperty("event_time")
-    public void setEventTime(long value) { this.eventTime = value; }
+    public void setEventTime(Long value) { this.eventTime = value; }
 
     @JsonProperty("event_type")
     public EventType getEventType() { return eventType; }

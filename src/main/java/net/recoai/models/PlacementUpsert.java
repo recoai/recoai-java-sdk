@@ -1,14 +1,16 @@
 package net.recoai.models;
 
 import com.fasterxml.jackson.annotation.*;
+import java.util.Map;
 
 public class PlacementUpsert {
     private EventDetail eventDetail;
-    private long eventTime;
+    private Long eventTime;
     private EventType eventType;
     private String name;
     private RankingStrategy ranking;
     private WeightedGenericCandidateRec[] strategies;
+    private Map<String, String> urlParams;
     private UserInfo userInfo;
 
     @JsonProperty("event_detail")
@@ -17,9 +19,9 @@ public class PlacementUpsert {
     public void setEventDetail(EventDetail value) { this.eventDetail = value; }
 
     @JsonProperty("event_time")
-    public long getEventTime() { return eventTime; }
+    public Long getEventTime() { return eventTime; }
     @JsonProperty("event_time")
-    public void setEventTime(long value) { this.eventTime = value; }
+    public void setEventTime(Long value) { this.eventTime = value; }
 
     @JsonProperty("event_type")
     public EventType getEventType() { return eventType; }
@@ -40,6 +42,11 @@ public class PlacementUpsert {
     public WeightedGenericCandidateRec[] getStrategies() { return strategies; }
     @JsonProperty("strategies")
     public void setStrategies(WeightedGenericCandidateRec[] value) { this.strategies = value; }
+
+    @JsonProperty("url_params")
+    public Map<String, String> getURLParams() { return urlParams; }
+    @JsonProperty("url_params")
+    public void setURLParams(Map<String, String> value) { this.urlParams = value; }
 
     @JsonProperty("user_info")
     public UserInfo getUserInfo() { return userInfo; }

@@ -6,7 +6,7 @@ import java.util.Map;
 public class RecoShow {
     private Map<String, String> additionalURIParams;
     private EventDetail eventDetail;
-    private long eventTime;
+    private Long eventTime;
     private EventType eventType;
     private String experimentID;
     private ProductDetailsRecoShow[] items;
@@ -25,9 +25,9 @@ public class RecoShow {
     public void setEventDetail(EventDetail value) { this.eventDetail = value; }
 
     @JsonProperty("event_time")
-    public long getEventTime() { return eventTime; }
+    public Long getEventTime() { return eventTime; }
     @JsonProperty("event_time")
-    public void setEventTime(long value) { this.eventTime = value; }
+    public void setEventTime(Long value) { this.eventTime = value; }
 
     @JsonProperty("event_type")
     public EventType getEventType() { return eventType; }

@@ -4,7 +4,7 @@ import java.io.IOException;
 import com.fasterxml.jackson.annotation.*;
 
 public enum EventType {
-    ADD_TO_CART, ADD_TO_LIST, CART_PAGE_VIEW, CATEGORY_PAGE_VIEW, CHECKOUT_START, DETAIL_PRODUCT_VIEW, HOME_PAGE_VIEW, IMAGE_INTERACTION, ITEM_REMOVE, ITEM_UPSERT, LIST_VIEW, OFFLINE_RECOMMENDATIONS_REMOVE, OFFLINE_RECOMMENDATIONS_UPSERT, OTHER_INTERACTION, PAGE_VISIT, PLACEMENT_REMOVE, PLACEMENT_UPSERT, PURCHASE_COMPLETE, RATE_PRODUCT, RECO_REQUEST, RECO_SHOW, REMOVE_FROM_CART, REMOVE_FROM_LIST, SORT_ITEMS, UNKNOWN_EVENT;
+    ADD_TO_CART, ADD_TO_LIST, CART_PAGE_VIEW, CATEGORY_PAGE_VIEW, CHANGE_ITEM_STOCK_STATE, CHECKOUT_START, DETAIL_PRODUCT_VIEW, HOME_PAGE_VIEW, IMAGE_INTERACTION, ITEM_REMOVE, ITEM_UPSERT, LIST_VIEW, OFFLINE_RECOMMENDATIONS_REMOVE, OFFLINE_RECOMMENDATIONS_UPSERT, OTHER_INTERACTION, PAGE_VISIT, PLACEMENT_REMOVE, PLACEMENT_UPSERT, PURCHASE_COMPLETE, RATE_PRODUCT, RECO_REQUEST, RECO_SHOW, REMOVE_FROM_CART, REMOVE_FROM_LIST, SEARCH_ITEMS, SORT_ITEMS, UNKNOWN_EVENT;
 
     @JsonValue
     public String toValue() {
@@ -13,6 +13,7 @@ public enum EventType {
             case ADD_TO_LIST: return "AddToList";
             case CART_PAGE_VIEW: return "CartPageView";
             case CATEGORY_PAGE_VIEW: return "CategoryPageView";
+            case CHANGE_ITEM_STOCK_STATE: return "ChangeItemStockState";
             case CHECKOUT_START: return "CheckoutStart";
             case DETAIL_PRODUCT_VIEW: return "DetailProductView";
             case HOME_PAGE_VIEW: return "HomePageView";
@@ -32,6 +33,7 @@ public enum EventType {
             case RECO_SHOW: return "RecoShow";
             case REMOVE_FROM_CART: return "RemoveFromCart";
             case REMOVE_FROM_LIST: return "RemoveFromList";
+            case SEARCH_ITEMS: return "SearchItems";
             case SORT_ITEMS: return "SortItems";
             case UNKNOWN_EVENT: return "UnknownEvent";
         }
@@ -44,6 +46,7 @@ public enum EventType {
         if (value.equals("AddToList")) return ADD_TO_LIST;
         if (value.equals("CartPageView")) return CART_PAGE_VIEW;
         if (value.equals("CategoryPageView")) return CATEGORY_PAGE_VIEW;
+        if (value.equals("ChangeItemStockState")) return CHANGE_ITEM_STOCK_STATE;
         if (value.equals("CheckoutStart")) return CHECKOUT_START;
         if (value.equals("DetailProductView")) return DETAIL_PRODUCT_VIEW;
         if (value.equals("HomePageView")) return HOME_PAGE_VIEW;
@@ -63,6 +66,7 @@ public enum EventType {
         if (value.equals("RecoShow")) return RECO_SHOW;
         if (value.equals("RemoveFromCart")) return REMOVE_FROM_CART;
         if (value.equals("RemoveFromList")) return REMOVE_FROM_LIST;
+        if (value.equals("SearchItems")) return SEARCH_ITEMS;
         if (value.equals("SortItems")) return SORT_ITEMS;
         if (value.equals("UnknownEvent")) return UNKNOWN_EVENT;
         throw new IOException("Cannot deserialize EventType");

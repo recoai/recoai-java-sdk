@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class ProductDetailsRecoShow {
     private String canonicalProductURI;
+    private String canonicalProductURIWithParams;
     private String[][] categories;
     private Currency currencyCode;
     private String id;
@@ -15,11 +16,17 @@ public class ProductDetailsRecoShow {
     private Double score;
     private Map<String, Double> strategiesUsed;
     private String title;
+    private String urlParams;
 
     @JsonProperty("canonical_product_uri")
     public String getCanonicalProductURI() { return canonicalProductURI; }
     @JsonProperty("canonical_product_uri")
     public void setCanonicalProductURI(String value) { this.canonicalProductURI = value; }
+
+    @JsonProperty("canonical_product_uri_with_params")
+    public String getCanonicalProductURIWithParams() { return canonicalProductURIWithParams; }
+    @JsonProperty("canonical_product_uri_with_params")
+    public void setCanonicalProductURIWithParams(String value) { this.canonicalProductURIWithParams = value; }
 
     @JsonProperty("categories")
     public String[][] getCategories() { return categories; }
@@ -70,4 +77,9 @@ public class ProductDetailsRecoShow {
     public String getTitle() { return title; }
     @JsonProperty("title")
     public void setTitle(String value) { this.title = value; }
+
+    @JsonProperty("url_params")
+    public String getURLParams() { return urlParams; }
+    @JsonProperty("url_params")
+    public void setURLParams(String value) { this.urlParams = value; }
 }

@@ -14,6 +14,7 @@
 //     AddToList data = Converter.AddToListFromJsonString(jsonString);
 //     APISettings data = Converter.APISettingsFromJsonString(jsonString);
 //     CategoryPageView data = Converter.CategoryPageViewFromJsonString(jsonString);
+//     ChangeItemStockState data = Converter.ChangeItemStockStateFromJsonString(jsonString);
 //     CheckoutStart data = Converter.CheckoutStartFromJsonString(jsonString);
 //     Object data = Converter.CommonFromJsonString(jsonString);
 //     DetailProductView data = Converter.DetailProductViewFromJsonString(jsonString);
@@ -34,6 +35,7 @@
 //     RecoShow data = Converter.RecoShowFromJsonString(jsonString);
 //     RemoveFromCart data = Converter.RemoveFromCartFromJsonString(jsonString);
 //     RemoveFromList data = Converter.RemoveFromListFromJsonString(jsonString);
+//     SearchItems data = Converter.SearchItemsFromJsonString(jsonString);
 //     CartPageView data = Converter.CartPageViewFromJsonString(jsonString);
 //     SortItems data = Converter.SortItemsFromJsonString(jsonString);
 //     UnknownEvent data = Converter.UnknownEventFromJsonString(jsonString);
@@ -116,6 +118,14 @@ public class Converter {
 
     public static String CategoryPageViewToJsonString(CategoryPageView obj) throws JsonProcessingException {
         return getCategoryPageViewObjectWriter().writeValueAsString(obj);
+    }
+
+    public static ChangeItemStockState ChangeItemStockStateFromJsonString(String json) throws IOException {
+        return getChangeItemStockStateObjectReader().readValue(json);
+    }
+
+    public static String ChangeItemStockStateToJsonString(ChangeItemStockState obj) throws JsonProcessingException {
+        return getChangeItemStockStateObjectWriter().writeValueAsString(obj);
     }
 
     public static CheckoutStart CheckoutStartFromJsonString(String json) throws IOException {
@@ -278,6 +288,14 @@ public class Converter {
         return getRemoveFromListObjectWriter().writeValueAsString(obj);
     }
 
+    public static SearchItems SearchItemsFromJsonString(String json) throws IOException {
+        return getSearchItemsObjectReader().readValue(json);
+    }
+
+    public static String SearchItemsToJsonString(SearchItems obj) throws JsonProcessingException {
+        return getSearchItemsObjectWriter().writeValueAsString(obj);
+    }
+
     public static CartPageView CartPageViewFromJsonString(String json) throws IOException {
         return getCartPageViewObjectReader().readValue(json);
     }
@@ -420,6 +438,36 @@ public class Converter {
     private static ObjectWriter getCategoryPageViewObjectWriter() {
         if (CategoryPageViewWriter == null) instantiateCategoryPageViewMapper();
         return CategoryPageViewWriter;
+    }
+
+    private static ObjectReader ChangeItemStockStateReader;
+    private static ObjectWriter ChangeItemStockStateWriter;
+
+    private static void instantiateChangeItemStockStateMapper() {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.findAndRegisterModules();
+        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+        SimpleModule module = new SimpleModule();
+        module.addDeserializer(OffsetDateTime.class, new JsonDeserializer<OffsetDateTime>() {
+            @Override
+            public OffsetDateTime deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
+                String value = jsonParser.getText();
+                return Converter.parseDateTimeString(value);
+            }
+        });
+        mapper.registerModule(module);
+        ChangeItemStockStateReader = mapper.readerFor(ChangeItemStockState.class);
+        ChangeItemStockStateWriter = mapper.writerFor(ChangeItemStockState.class);
+    }
+
+    private static ObjectReader getChangeItemStockStateObjectReader() {
+        if (ChangeItemStockStateReader == null) instantiateChangeItemStockStateMapper();
+        return ChangeItemStockStateReader;
+    }
+
+    private static ObjectWriter getChangeItemStockStateObjectWriter() {
+        if (ChangeItemStockStateWriter == null) instantiateChangeItemStockStateMapper();
+        return ChangeItemStockStateWriter;
     }
 
     private static ObjectReader CheckoutStartReader;
@@ -1020,6 +1068,36 @@ public class Converter {
     private static ObjectWriter getRemoveFromListObjectWriter() {
         if (RemoveFromListWriter == null) instantiateRemoveFromListMapper();
         return RemoveFromListWriter;
+    }
+
+    private static ObjectReader SearchItemsReader;
+    private static ObjectWriter SearchItemsWriter;
+
+    private static void instantiateSearchItemsMapper() {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.findAndRegisterModules();
+        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+        SimpleModule module = new SimpleModule();
+        module.addDeserializer(OffsetDateTime.class, new JsonDeserializer<OffsetDateTime>() {
+            @Override
+            public OffsetDateTime deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
+                String value = jsonParser.getText();
+                return Converter.parseDateTimeString(value);
+            }
+        });
+        mapper.registerModule(module);
+        SearchItemsReader = mapper.readerFor(SearchItems.class);
+        SearchItemsWriter = mapper.writerFor(SearchItems.class);
+    }
+
+    private static ObjectReader getSearchItemsObjectReader() {
+        if (SearchItemsReader == null) instantiateSearchItemsMapper();
+        return SearchItemsReader;
+    }
+
+    private static ObjectWriter getSearchItemsObjectWriter() {
+        if (SearchItemsWriter == null) instantiateSearchItemsMapper();
+        return SearchItemsWriter;
     }
 
     private static ObjectReader CartPageViewReader;

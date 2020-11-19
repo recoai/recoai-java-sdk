@@ -2,18 +2,13 @@ package net.recoai.models;
 
 import com.fasterxml.jackson.annotation.*;
 
-public class RemoveFromCart {
-    private String cartID;
+public class SearchItems {
     private EventDetail eventDetail;
     private Long eventTime;
     private EventType eventType;
-    private ItemDetails item;
+    private ItemDetails[] items;
+    private String query;
     private UserInfo userInfo;
-
-    @JsonProperty("cart_id")
-    public String getCartID() { return cartID; }
-    @JsonProperty("cart_id")
-    public void setCartID(String value) { this.cartID = value; }
 
     @JsonProperty("event_detail")
     public EventDetail getEventDetail() { return eventDetail; }
@@ -30,10 +25,15 @@ public class RemoveFromCart {
     @JsonProperty("event_type")
     public void setEventType(EventType value) { this.eventType = value; }
 
-    @JsonProperty("item")
-    public ItemDetails getItem() { return item; }
-    @JsonProperty("item")
-    public void setItem(ItemDetails value) { this.item = value; }
+    @JsonProperty("items")
+    public ItemDetails[] getItems() { return items; }
+    @JsonProperty("items")
+    public void setItems(ItemDetails[] value) { this.items = value; }
+
+    @JsonProperty("query")
+    public String getQuery() { return query; }
+    @JsonProperty("query")
+    public void setQuery(String value) { this.query = value; }
 
     @JsonProperty("user_info")
     public UserInfo getUserInfo() { return userInfo; }
